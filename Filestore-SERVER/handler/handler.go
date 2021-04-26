@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-//处理文件上传
+// UploadHandler 处理文件上传
 func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		//返回上传html页面
@@ -57,12 +57,12 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//上传已完成
+// UploadSucHandler 上传已完成
 func UploadSucHandler(w http.ResponseWriter, r*http.Request){
 	io.WriteString(w,"Upload finished")
 }
 
-//获取文件元信息接口
+// GetFileMetaHandler 获取文件元信息接口
 func GetFileMetaHandler(w http.ResponseWriter, r *http.Request){
 
 	r.ParseForm()
@@ -76,7 +76,7 @@ func GetFileMetaHandler(w http.ResponseWriter, r *http.Request){
 	w.Write(data)
 }
 
-//下载文件接口
+// DownloadHandler 下载文件接口
 func DownloadHandler(w http.ResponseWriter,r *http.Request)  {
 	r.ParseForm()
 	fsha1:=r.Form.Get("filehash")
@@ -98,9 +98,14 @@ func DownloadHandler(w http.ResponseWriter,r *http.Request)  {
 	w.Header().Set("Content-Type","application/octect-stream")
 	w.Header().Set("Content-disposition","attachment;filename=\""+fm.FileName+"\"")
 	w.Write(data)
+}
 
-
+// FileUpdateMetaHandler 文件重命名接口
+func FileUpdateMetaHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
 
 }
+
+//文件删除接口
 
 
